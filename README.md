@@ -45,3 +45,12 @@ WantedBy=shutdown.target
 - Type=oneshot
 Type is "oneshot", systemd makes sure that no services are being started/stopped until 
 our service is fully initialized or until our service has started
+
+#### How to run a service at shutdown
+
+Create a oneshot service with an `ExecStop` with `RemainAfterExit=yes`. you don’t have to have an `ExecStart` with a oneshot service.
+```
+Type=oneshot
+RemainAfterExit=yes
+ExecStop=/bin/bash -c "echo Oneshot service - stop"
+```
